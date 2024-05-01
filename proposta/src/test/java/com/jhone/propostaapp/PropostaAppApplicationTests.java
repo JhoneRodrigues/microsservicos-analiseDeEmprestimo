@@ -1,10 +1,10 @@
-package com.jhonerodrigues.proposta;
+package com.jhone.propostaapp;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class PropostaApplicationTests {
+class PropostaAppApplicationTests {
 
 	@Test
 	void contextLoads() {
