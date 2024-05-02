@@ -14,6 +14,8 @@ public class Usuario {
 
     private String nome;
     private String sobrenome;
+    private String telefone;
+    private String cpf;
     private Double renda;
 
     @OneToOne(mappedBy = "usuario")
