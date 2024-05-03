@@ -11,7 +11,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.util.List;
 
 @RestController
-@RequestMapping("/propostas")
+@RequestMapping("/proposta")
 @RequiredArgsConstructor
 public class PropostaController {
 
