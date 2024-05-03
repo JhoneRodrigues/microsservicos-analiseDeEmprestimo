@@ -8,11 +8,17 @@ import com.jhone.propostaapp.repositories.PropostaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class PropostaService {
 
     private final PropostaRepository repository;
+
+    public List<PropostaResponseDto> obterProposta(){
+        return PropostaMapper.INSTANCE.convertListEntityToDto(repository.findAll());
+    }
 
     public PropostaResponseDto criar (PropostaRequestDto request){
         Proposta proposta = PropostaMapper.INSTANCE.convertDtoToProposta(request);
