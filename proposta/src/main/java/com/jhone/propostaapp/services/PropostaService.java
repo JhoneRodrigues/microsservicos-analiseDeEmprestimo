@@ -6,17 +6,24 @@ import com.jhone.propostaapp.entities.Proposta;
 import com.jhone.propostaapp.mapper.PropostaMapper;
 import com.jhone.propostaapp.repositories.PropostaRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 public class PropostaService {
 
-    private final PropostaRepository repository;
+    private PropostaRepository repository;
+    private NotificacaoService notificacaoService;
+    private String exchange;
 
-    private final NotificacaoService notificacaoService;
+    public PropostaService( @Value("${rabbitmq.propostapendente.exchange}") String exchange,
+                            NotificacaoService notificacaoService, PropostaRepository repository) {
+        this.exchange = exchange;
+        this.notificacaoService = notificacaoService;
+        this.repository = repository;
+    }
 
     public List<PropostaResponseDto> obterProposta(){
         return PropostaMapper.INSTANCE.convertListEntityToDto(repository.findAll());
@@ -28,7 +35,7 @@ public class PropostaService {
 
         var response = PropostaMapper.INSTANCE.convertEntityToDto(proposta);
 
-        notificacaoService.notificar(response,"proposta-pendente.ex");
+        notificacaoService.notificar(response,exchange);
 
         return response;
     }
