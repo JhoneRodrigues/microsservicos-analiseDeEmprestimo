@@ -16,6 +16,8 @@ public class PropostaService {
 
     private final PropostaRepository repository;
 
+    private final NotificacaoService notificacaoService;
+
     public List<PropostaResponseDto> obterProposta(){
         return PropostaMapper.INSTANCE.convertListEntityToDto(repository.findAll());
     }
@@ -24,6 +26,10 @@ public class PropostaService {
         Proposta proposta = PropostaMapper.INSTANCE.convertDtoToProposta(request);
         repository.save(proposta);
 
-        return PropostaMapper.INSTANCE.convertEntityToDto(proposta);
+        var response = PropostaMapper.INSTANCE.convertEntityToDto(proposta);
+
+        notificacaoService.notificar(response,"proposta-pendente.ex");
+
+        return response;
     }
 }
