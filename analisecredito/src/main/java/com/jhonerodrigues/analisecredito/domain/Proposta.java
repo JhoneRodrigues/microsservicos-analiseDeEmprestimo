@@ -1,4 +1,4 @@
-package com.jhonerodrigeus.notification.domain;
+package com.jhonerodrigues.analisecredito.domain;
 
 import lombok.Getter;
 import lombok.Setter;
